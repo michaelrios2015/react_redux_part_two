@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit'
+
+const store = configureStore(( state = { loading: true, users: []}, action )=>{
+    return state;
+});
 
 class App extends Component {
     constructor(){
@@ -43,7 +48,7 @@ class App extends Component {
 import { createRoot } from 'react-dom/client';
 const container = document.querySelector('#root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<App tab="home" />);
+root.render(<Provider store= { store }><App tab="home" /></Provider>);
 
 
 // not the way they do it anymore 
